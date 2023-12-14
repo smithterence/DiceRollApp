@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">DiceRollApp</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="start">Start</string>
+    <string name="about">Rules</string>
+    <string name="roll">Roll</string>
+    <string name="hold">Hold</string>
+    <string name="quit">Quit</string>
+    <string name="title">
+        Pig
+    </string>
+    <string name="description">A dice game for two players, that you can play with one phone</string>
+</resources>
