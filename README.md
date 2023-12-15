@@ -5,3 +5,4 @@ Roll two six sided die. Add their sum to your score. If either or both of the tw
 You can choose to hold your turn, and pass to the other player. 
 The first player to reach 100 points wins.
 
+This app is made in Android Studio and uses android libraries.
