@@ -3,6 +3,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -38,11 +39,13 @@ public class SecondFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        MediaPlayer diceSound = MediaPlayer.create(getContext(), R.raw.diceroll);
+        MediaPlayer failureSound = MediaPlayer.create(getContext(), R.raw.failure);
         final boolean[] turn = {true};
-        int frames = 50;
+        final int frames = 50;
         final int[] p1score = {0};
         final int[] p2score = {0};
-        int[] dice = {R.drawable.sixsideddice1,R.drawable.sixsideddice2,R.drawable.sixsideddice3,
+        final int[] dice = {R.drawable.sixsideddice1,R.drawable.sixsideddice2,R.drawable.sixsideddice3,
                 R.drawable.sixsideddice4, R.drawable.sixsideddice5, R.drawable.sixsideddice6};
 
         AnimationDrawable rollAnimation = new AnimationDrawable();
@@ -88,7 +91,6 @@ public class SecondFragment extends Fragment {
                         (new Handler()).postDelayed(new Runnable() {
                             @Override
                             public void run() {
-
                                 rollAnimation.stop();
                                 rollAnimation2.stop();
                                 binding.dice1.setImageResource(dice[scores[0] - 1]);
@@ -111,6 +113,7 @@ public class SecondFragment extends Fragment {
                                     else {
                                         binding.textviewTurn.setText(R.string.player_two_turn);
                                     }
+                                    failureSound.start();
                                 }
                                 else {
                                     if (turn[0]) {
@@ -121,12 +124,14 @@ public class SecondFragment extends Fragment {
                                         p2score[0] += sum;
                                         binding.textviewScore2.setText(getString(R.string.player_two_score, p2score[0]));
                                     }
+                                    diceSound.start();
                                 }
                                 binding.rollButton.setEnabled(true);
                             }
                         }, 500);
+
                     }
-                }, 550);
+                }, 500);
 
             }
         });
