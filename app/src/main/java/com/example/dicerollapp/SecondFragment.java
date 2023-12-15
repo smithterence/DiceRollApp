@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -72,50 +73,60 @@ public class SecondFragment extends Fragment {
         binding.rollButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.dice1.setImageDrawable(rollAnimation);
-                binding.dice2.setImageDrawable(rollAnimation2);
-                rollAnimation.start();
-                rollAnimation2.start();
-                Random rand = new Random();
-                int[] scores = {rand.nextInt(6) + 1, rand.nextInt(6) + 1};
-                (new Handler()).postDelayed(new Runnable() {
+                binding.rollButton.setEnabled(false);
+                Handler h = new Handler();
+                h.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        rollAnimation.stop();
-                        rollAnimation2.stop();
-                        binding.dice1.setImageResource(dice[scores[0] - 1]);
-                        binding.dice2.setImageResource(dice[scores[1] - 1]);
 
-                        int sum = scores[0] + scores[1];
-                        if (scores[0] == 1 || scores[1] == 1) {
-                            if (turn[0]) {
-                                p1score[0] = 0;
-                                binding.textviewScore1.setText(getString(R.string.player_one_score, p1score[0]));
+                        binding.dice1.setImageDrawable(rollAnimation);
+                        binding.dice2.setImageDrawable(rollAnimation2);
+                        rollAnimation.start();
+                        rollAnimation2.start();
+                        Random rand = new Random();
+                        int[] scores = {rand.nextInt(6) + 1, rand.nextInt(6) + 1};
+                        (new Handler()).postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                rollAnimation.stop();
+                                rollAnimation2.stop();
+                                binding.dice1.setImageResource(dice[scores[0] - 1]);
+                                binding.dice2.setImageResource(dice[scores[1] - 1]);
+
+                                int sum = scores[0] + scores[1];
+                                if (scores[0] == 1 || scores[1] == 1) {
+                                    if (turn[0]) {
+                                        p1score[0] = 0;
+                                        binding.textviewScore1.setText(getString(R.string.player_one_score, p1score[0]));
+                                    }
+                                    else {
+                                        p2score[0] = 0;
+                                        binding.textviewScore2.setText(getString(R.string.player_two_score, p2score[0]));
+                                    }
+                                    turn[0] = !turn[0];
+                                    if (turn[0]) {
+                                        binding.textviewTurn.setText(R.string.player_one_turn);
+                                    }
+                                    else {
+                                        binding.textviewTurn.setText(R.string.player_two_turn);
+                                    }
+                                }
+                                else {
+                                    if (turn[0]) {
+                                        p1score[0] += sum;
+                                        binding.textviewScore1.setText(getString(R.string.player_one_score, p1score[0]));
+                                    }
+                                    else {
+                                        p2score[0] += sum;
+                                        binding.textviewScore2.setText(getString(R.string.player_two_score, p2score[0]));
+                                    }
+                                }
+                                binding.rollButton.setEnabled(true);
                             }
-                            else {
-                                p2score[0] = 0;
-                                binding.textviewScore2.setText(getString(R.string.player_two_score, p2score[0]));
-                            }
-                            turn[0] = !turn[0];
-                            if (turn[0]) {
-                                binding.textviewTurn.setText(R.string.player_one_turn);
-                            }
-                            else {
-                                binding.textviewTurn.setText(R.string.player_two_turn);
-                            }
-                        }
-                        else {
-                            if (turn[0]) {
-                                p1score[0] += sum;
-                                binding.textviewScore1.setText(getString(R.string.player_one_score, p1score[0]));
-                            }
-                            else {
-                                p2score[0] += sum;
-                                binding.textviewScore2.setText(getString(R.string.player_two_score, p2score[0]));
-                            }
-                        }
+                        }, 500);
                     }
-                }, 1000);
+                }, 550);
 
             }
         });
