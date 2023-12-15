@@ -12,3 +12,5 @@ Music by <a href="https://pixabay.com/users/comastudio-26079283/?utm_source=link
 Dice Sound Effect by <a href="https://pixabay.com/users/u_qpfzpydtro-29496424/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=142528">u_qpfzpydtro</a> from <a href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=142528">Pixabay</a>
 
 Failure Sound Effect from <a href="https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=7184">Pixabay</a>
+
+Victory Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6185">Pixabay</a>
