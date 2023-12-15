@@ -19,4 +19,7 @@
     <string name="score_2">P2 SCORE: 0</string>
     <string name="player_one_score">P1 SCORE: %d</string>
     <string name="player_two_score">P2 SCORE: %d</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="p1victory">PLAYER 1 WINS!</string>
+    <string name="p2victory">PLAYER 2 WINS!</string>
 </resources>

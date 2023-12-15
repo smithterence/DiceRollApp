@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,23 +32,23 @@ public class SecondFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
-
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         MediaPlayer diceSound = MediaPlayer.create(getContext(), R.raw.diceroll);
         MediaPlayer failureSound = MediaPlayer.create(getContext(), R.raw.failure);
+        MediaPlayer victorySound = MediaPlayer.create(getContext(), R.raw.success);
+        MediaPlayer backgroundMusic = MediaPlayer.create(getContext(), R.raw.casinoost);
+        backgroundMusic.setLooping(true);
+        backgroundMusic.start();
         final boolean[] turn = {true};
         final int frames = 50;
         final int[] p1score = {0};
         final int[] p2score = {0};
         final int[] dice = {R.drawable.sixsideddice1,R.drawable.sixsideddice2,R.drawable.sixsideddice3,
                 R.drawable.sixsideddice4, R.drawable.sixsideddice5, R.drawable.sixsideddice6};
-
         AnimationDrawable rollAnimation = new AnimationDrawable();
         for (int i : new int[]{R.drawable.sixsideddice1, R.drawable.sixsideddice3,
                 R.drawable.sixsideddice2, R.drawable.sixsideddice4, R.drawable.sixsideddice6,
@@ -61,17 +62,16 @@ public class SecondFragment extends Fragment {
             rollAnimation2.addFrame(Objects.requireNonNull
                     (ResourcesCompat.getDrawable(getResources(), i, getActivity().getTheme())),frames);
         }
-
-
         binding.dice1.setImageDrawable(rollAnimation);
         binding.dice2.setImageDrawable(rollAnimation2);
+
         binding.quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                backgroundMusic.stop();
                 NavHostFragment.findNavController(SecondFragment.this).navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
-
 
         binding.rollButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +124,31 @@ public class SecondFragment extends Fragment {
                                         p2score[0] += sum;
                                         binding.textviewScore2.setText(getString(R.string.player_two_score, p2score[0]));
                                     }
-                                    diceSound.start();
+                                    if(p1score[0] >= 100) {
+                                        p1score[0] = 0;
+                                        p2score[0] = 0;
+                                        binding.textviewTurn.setText(getString(R.string.p1victory));
+                                        victorySound.start();
+                                        (new Handler()).postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                            }
+                                        }, 2000);
+                                    }
+                                    else if (p2score[0] >= 100) {
+                                        p1score[0] = 0;
+                                        p2score[0] = 0;
+                                        binding.textviewTurn.setText(getString(R.string.p2victory));
+                                        victorySound.start();
+                                        (new Handler()).postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                            }
+                                        }, 2000);
+                                    }
+                                    else {
+                                        diceSound.start();
+                                    }
                                 }
                                 binding.rollButton.setEnabled(true);
                             }

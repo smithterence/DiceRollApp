@@ -16,13 +16,16 @@
             android:id="@+id/textview_score2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            android:fontFamily="monospace"
             android:text="@string/score_2"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/roll_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.768"
+            app:layout_constraintHorizontal_bias="0.805"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.667" />
+            app:layout_constraintVertical_bias="0.962" />
 
         <Button
             android:id="@+id/quit_button"
@@ -67,6 +70,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/player_one_turn"
+            android:textSize="34sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -78,7 +83,9 @@
             android:id="@+id/textview_score1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="monospace"
             android:text="@string/score_1"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/hold_button"
             app:layout_constraintEnd_toStartOf="@+id/textview_score2"
             app:layout_constraintHorizontal_bias="0.489"
@@ -90,14 +97,12 @@
             android:id="@+id/dice1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="28dp"
+            android:layout_marginStart="8dp"
             android:src="@drawable/sixsideddice1"
             app:layout_constraintBottom_toTopOf="@+id/textview_score1"
-            app:layout_constraintEnd_toStartOf="@+id/dice2"
-            app:layout_constraintHorizontal_bias="0.317"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview_turn"
-            app:layout_constraintVertical_bias="0.57" />
+            app:layout_constraintVertical_bias="0.514" />
 
         <ImageView
             android:id="@+id/dice2"
@@ -106,10 +111,10 @@
             android:src="@drawable/sixsideddice2"
             app:layout_constraintBottom_toTopOf="@+id/textview_score2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.933"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/dice1"
             app:layout_constraintTop_toBottomOf="@+id/textview_turn"
-            app:layout_constraintVertical_bias="0.567" />
+            app:layout_constraintVertical_bias="0.515" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
